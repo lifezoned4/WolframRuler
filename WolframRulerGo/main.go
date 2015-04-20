@@ -172,14 +172,14 @@ func AutomateSolNB(nb Neighbourhood) rune {
 }
 
 func UsedAutomate(nb Neighbourhood) rune {
-	return AutomateSolNB(nb)
-	// return AutomateWoNB(nb, 110)
+	// return AutomateSolNB(nb)
+	return AutomateWoNB(nb, 110)
 }
 
 func Automate(state []rune) []rune {
 	bstate := make([]rune, len(state))
 
-	for i := range state {
+	for i, _ := range state {
 		nb := GetNeighbourhood(state, i)
 		bstate[i] = UsedAutomate(nb)
 	}
@@ -195,11 +195,10 @@ func main() {
 		if i == len(state)/2 {
 			rt = S
 		}
-		state[i] = rt // r.Intn(2)
+		state[i] = rt
 	}
-	state[0] = B
 
-	for i := 0; i < 500; i++ {
+	for i := 0; i < 50; i++ {
 		for _, r := range state {
 			fmt.Print(string(r))
 		}
