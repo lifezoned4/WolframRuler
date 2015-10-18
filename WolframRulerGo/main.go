@@ -7,22 +7,9 @@ import (
 )
 
 const (
-	STAR = '*'
 	L    = '0'
 	S    = 'S'
-	SNN  = 'Z'
-	N    = 'N'
-	NN   = '+'
-	B    = 'B'
-	T1   = '1'
-	T2   = '2'
-	T3   = '3'
-	T4   = '4'
-	T5   = '5'
-	T6   = '6'
-	T7   = '7'
-	T8   = '8'
-	T9   = '9'
+	STAR = '*'
 )
 
 type Rule struct {
@@ -127,53 +114,9 @@ func (r *Rule) Eval(nb Neighbourhood) rune {
 	return STAR
 }
 
-func AutomateSolNB(nb Neighbourhood) rune {
-	rules := []Rule{
-
-		Rule{nb: MakeNeighbourhood(STAR, S, L, STAR, STAR), follow: S},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, S, L, STAR), follow: L},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, S, B, STAR), follow: S},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, S, T1, STAR), follow: S},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, S, T2, STAR), follow: S},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, S, T3, STAR), follow: S},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, S, T4, STAR), follow: S},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, S, T5, STAR), follow: S},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, S, T6, STAR), follow: S},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, S, T7, STAR), follow: S},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, S, T8, STAR), follow: S},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, S, T9, STAR), follow: S},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, S, S, STAR), follow: S},
-		Rule{nb: MakeNeighbourhood(STAR, B, S, STAR, STAR), follow: L},
-		Rule{nb: MakeNeighbourhood(STAR, B, L, STAR, STAR), follow: S},
-		Rule{nb: MakeNeighbourhood(STAR, B, L, S, STAR), follow: L},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, B, S, STAR), follow: T1},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, B, STAR, STAR), follow: B},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, T1, L, STAR), follow: T2},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, T2, L, STAR), follow: T3},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, T3, L, STAR), follow: T4},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, T4, L, STAR), follow: T5},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, T5, L, STAR), follow: T6},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, T6, L, STAR), follow: T7},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, T7, L, STAR), follow: T8},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, T8, L, STAR), follow: T9},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, T9, L, STAR), follow: B},
-		Rule{nb: MakeNeighbourhood(STAR, STAR, STAR, STAR, STAR), follow: L}}
-
-	t := STAR
-	for _, r := range rules {
-
-		t = r.Eval(nb)
-		if t != STAR {
-			return t
-		}
-	}
-
-	return STAR
-}
-
 func UsedAutomate(nb Neighbourhood) rune {
 	// return AutomateSolNB(nb)
-	return AutomateWoNB(nb, 110)
+	return AutomateWoNB(nb, 30)
 }
 
 func Automate(state []rune) []rune {
@@ -202,7 +145,7 @@ func main() {
 		for _, r := range state {
 			fmt.Print(string(r))
 		}
-		fmt.Printf("\n")
+		fmt.Printf("\r\n")
 		state = Automate(state)
 	}
 
